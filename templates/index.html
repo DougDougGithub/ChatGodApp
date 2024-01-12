@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    
+    <title>DougDoug Chat God App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+    <!-- Note: we are getting a local script,  -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-textfill@0.6.0/source/jquery.textfill.min.js"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+
+            var socket = io();
+
+            socket.on('message_send', function(msg, cb) {
+                console.log("Got data: " + msg)
+
+                // DATA RECEIVED:
+                // message = string
+                // current_user = string
+                // user_number = string (e.g. "1", "2")
+
+                $('#user-message-' + msg.user_number).text(msg.message);
+                if (msg.user_number == "1") {
+                    $('#user-name-' + msg.user_number).text(msg.current_user[0].toUpperCase() + msg.current_user.substr(1));
+                } else if (msg.user_number == "2") {
+                    $('#user-name-' + msg.user_number).text(msg.current_user[0].toUpperCase() + msg.current_user.substr(1));
+                } else if (msg.user_number == "3") {
+                    $('#user-name-' + msg.user_number).text(msg.current_user[0].toUpperCase() + msg.current_user.substr(1));
+                }
+
+                // Add an optional title to the beginning of username:
+                // $('#user-name-' + msg.user_number).text('Mayor' + '\n' + msg.current_user[0].toUpperCase() + msg.current_user.substr(1) + " as Shrek");
+                
+                // Space out the text to fill the box evenly
+
+                $('#user-name-box-1').textfill({
+                     minFontPixels: 2,
+                     maxFontPixels: 50,
+                     explicitHeight: 60
+                 });
+                $('#user-message-box-1').textfill({
+                     minFontPixels: 2,
+                     maxFontPixels: 30
+                 });
+                $('#user-name-box-2').textfill({
+                     minFontPixels: 2,
+                     maxFontPixels: 50,
+                     explicitHeight: 60
+                 });
+                $('#user-message-box-2').textfill({
+                     minFontPixels: 2,
+                     maxFontPixels: 30
+                 });
+                $('#user-name-box-3').textfill({
+                     minFontPixels: 2,
+                    maxFontPixels: 50,
+                    explicitHeight: 60
+                 });
+                $('#user-message-box-3').textfill({
+                     minFontPixels: 2,
+                    maxFontPixels: 30
+                 });
+
+                if (cb)
+                    cb();
+            });
+
+            $('form#pickrandom1').submit(function(event) {
+                socket.emit('pickrandom', {'user_number': '1'});
+                return false;
+            });
+
+            $('form#pickrandom2').submit(function(event) {
+                socket.emit('pickrandom', {'user_number': '2'});
+                return false;
+            });
+
+            $('form#pickrandom3').submit(function(event) {
+                socket.emit('pickrandom', {'user_number': '3'});
+                return false;
+            });
+
+            $('form#tts1').change(function(event) {
+                console.log($('#checkbox1').prop('checked'))
+                socket.emit('tts',
+                    {'user_number': '1',
+                    'checked': $('#checkbox1').prop('checked')});
+                return false;
+            });
+
+            $('form#tts2').change(function(event) {
+                console.log($('#checkbox2').prop('checked'))
+                socket.emit('tts',
+                    {'user_number': '2',
+                    'checked': $('#checkbox2').prop('checked')});
+                return false;
+            });
+
+            $('form#tts3').change(function(event) {
+                console.log($('#checkbox3').prop('checked'))
+                socket.emit('tts',
+                    {'user_number': '3',
+                    'checked': $('#checkbox3').prop('checked')});
+                return false;
+            });
+
+            $('form#choose1').submit(function(event) {
+                socket.emit('choose',
+                    {'user_number': '1',
+                    'chosen_user': $("form#choose1 input").val()});
+                $("form#choose1 input").val('')
+                return false;
+            });
+
+            $('form#choose2').submit(function(event) {
+                socket.emit('choose',
+                    {'user_number': '2',
+                    'chosen_user': $("form#choose2 input").val()});
+                $("form#choose2 input").val('')
+                return false;
+            });
+
+            $('form#choose3').submit(function(event) {
+                socket.emit('choose',
+                    {'user_number': '3',
+                    'chosen_user': $("form#choose3 input").val()});
+                $("form#choose3 input").val('')
+                return false;
+            });
+
+            $('#voicename1').change(function() {
+                socket.emit('voicename', {'user_number': '1', 'voice_name': $(this).val()})
+            });
+            $('#voicestyle1').change(function() {
+                socket.emit('voicestyle', {'user_number': '1', 'voice_style': $(this).val()})
+            });
+
+            $('#voicename2').change(function() {
+                socket.emit('voicename', {'user_number': '2', 'voice_name': $(this).val()})
+            });
+            $('#voicestyle2').change(function() {
+                socket.emit('voicestyle', {'user_number': '2', 'voice_style': $(this).val()})
+            });
+
+            $('#voicename3').change(function() {
+                socket.emit('voicename', {'user_number': '3', 'voice_name': $(this).val()})
+            });
+            $('#voicestyle3').change(function() {
+                socket.emit('voicestyle', {'user_number': '3', 'voice_style': $(this).val()})
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1 style="margin-bottom: 10px;">Holy Chat God Selector</h1>
+    <div style="display:flex; flex-direction:row;">
+
+        <div>
+            <form id="pickrandom1" method="POST" action="#" >
+                <input type="submit" value="Pick Random" id="pick-random-input" style="border-color: #ccc; border-radius: 10px;">
+            </form>
+            <form id="tts1" method="POST" action="#">
+                <label for="tts">TTS 1:</label>
+                <input id="checkbox1" type="checkbox" class="tts-checkbox" style="text-align: left;" value="tts" name="tts" checked>
+            </form> 
+            <br><br>
+            <form id="choose1" class="choose-box" method="POST" action="#">
+                <label for="tts">Choose User:</label>
+                <input type="text" class="choose">
+            </form> 
+            <br><br>
+            <select id="voicename1">
+              <option value="en-US-DavisNeural">Davis</option>
+              <option value="en-US-TonyNeural">Tony</option>
+              <option value="en-US-JasonNeural">Jason</option>
+              <option value="en-US-GuyNeural">Guy</option>
+              <option value="en-US-JaneNeural">Jane</option>
+              <option value="en-US-NancyNeural">Nancy</option>
+              <option value="en-US-JennyNeural">Jenny</option>
+              <option value="en-US-AriaNeural">Aria</option>
+            </select>
+            <select id="voicestyle1">
+              <option value="random">random</option>
+              <option value="angry">angry</option>
+              <option value="cheerful">cheerful</option>
+              <option value="excited">excited</option>
+              <option value="hopeful">hopeful</option>
+              <option value="sad">sad</option>
+              <option value="shouting">shouting</option>
+              <option value="terrified">terrified</option>
+              <option value="unfriendly">unfriendly</option>
+              <option value="whispering">whispering</option>
+            </select>
+            <br><br>
+            <div class="user-name-box" id="user-name-box-1"> 
+                <span class="user-name" id="user-name-1">Temp User</span>
+            </div>
+            <div class="user-message-box" id="user-message-box-1">
+                <span class="user-message" id="user-message-1" >Temp message</span>
+            </div>
+        </div>
+
+        <!-- 3 Player Distance -->
+        <div style="width: 87px;"></div>
+
+        <div>
+            <form id="pickrandom2" method="POST" action="#" >
+                <input type="submit" value="Pick Random" id="pick-random-input" style="border-color: #ccc; border-radius: 10px;">
+            </form>
+            <form id="tts2" method="POST" action="#">
+                <label for="tts">TTS 2:</label>
+                <input id="checkbox2" type="checkbox" class="tts-checkbox" style="text-align: left;" value="tts" name="tts" checked>
+            </form> 
+            <br><br>
+            <form id="choose2" class="choose-box" method="POST" action="#">
+                <label for="tts">Choose User:</label>
+                <input type="text" class="choose">
+            </form> 
+            <br><br>
+            <select id="voicename2">
+              <option value="en-US-DavisNeural">Davis</option>
+              <option value="en-US-TonyNeural">Tony</option>
+              <option value="en-US-JasonNeural">Jason</option>
+              <option value="en-US-GuyNeural">Guy</option>
+              <option value="en-US-JaneNeural">Jane</option>
+              <option value="en-US-NancyNeural">Nancy</option>
+              <option value="en-US-JennyNeural">Jenny</option>
+              <option value="en-US-AriaNeural">Aria</option>
+            </select>
+            <select id="voicestyle2">
+              <option value="random">random</option>
+              <option value="angry">angry</option>
+              <option value="cheerful">cheerful</option>
+              <option value="excited">excited</option>
+              <option value="hopeful">hopeful</option>
+              <option value="sad">sad</option>
+              <option value="shouting">shouting</option>
+              <option value="terrified">terrified</option>
+              <option value="unfriendly">unfriendly</option>
+              <option value="whispering">whispering</option>
+            </select>
+            <br><br>
+            <div class="user-name-box" id="user-name-box-2"> 
+                <span class="user-name" id="user-name-2">Temp User</span>
+            </div>
+            <div class="user-message-box" id="user-message-box-2">
+                <span class="user-message" id="user-message-2" >Temp message</span>
+            </div>
+        </div>
+
+        <!-- 3 Player Distance -->
+        <div style="width: 87px;"></div>
+
+        <div>
+            <form id="pickrandom3" method="POST" action="#" >
+                <input type="submit" value="Pick Random" id="pick-random-input" style="border-color: #ccc; border-radius: 10px;">
+            </form>
+            <form id="tts3" method="POST" action="#">
+                <label for="tts">TTS 3:</label>
+                <input id="checkbox3" type="checkbox" class="tts-checkbox" style="text-align: left;" value="tts" name="tts" checked>
+            </form> 
+            <br><br>
+            <form id="choose3" class="choose-box" method="POST" action="#">
+                <label for="tts">Choose User:</label>
+                <input type="text" class="choose">
+            </form> 
+            <br><br>
+            <select id="voicename3">
+              <option value="en-US-DavisNeural">Davis</option>
+              <option value="en-US-TonyNeural">Tony</option>
+              <option value="en-US-JasonNeural">Jason</option>
+              <option value="en-US-GuyNeural">Guy</option>
+              <option value="en-US-JaneNeural">Jane</option>
+              <option value="en-US-NancyNeural">Nancy</option>
+              <option value="en-US-JennyNeural">Jenny</option>
+              <option value="en-US-AriaNeural">Aria</option>
+            </select>
+            <select id="voicestyle3">
+              <option value="random">random</option>
+              <option value="angry">angry</option>
+              <option value="cheerful">cheerful</option>
+              <option value="excited">excited</option>
+              <option value="hopeful">hopeful</option>
+              <option value="sad">sad</option>
+              <option value="shouting">shouting</option>
+              <option value="terrified">terrified</option>
+              <option value="unfriendly">unfriendly</option>
+              <option value="whispering">whispering</option>
+            </select>
+            <br><br>
+            <div class="user-name-box" id="user-name-box-3"> 
+                <span class="user-name" id="user-name-3">Temp User</span>
+            </div>
+            <div class="user-message-box" id="user-message-box-3">
+                <span class="user-message" id="user-message-3" >Temp message</span>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

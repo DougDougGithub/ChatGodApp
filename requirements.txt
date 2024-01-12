@@ -1,0 +1,12 @@
+azure.cognitiveservices.speech
+Flask
+Flask_SocketIO
+gTTS
+mutagen
+obs_websocket_py
+pydub
+pygame
+pygame_ce
+pytz
+soundfile
+twitchio

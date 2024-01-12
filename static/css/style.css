@@ -1,0 +1,64 @@
+/* Applies to all elements */
+* {
+    font-family: 'Roboto', sans-serif;
+    background-color: hsl(250, 24%, 19%);
+    color: #ccc;
+/*    color: #fff;*/
+    scrollbar-width: none; /*firefox support */    
+}
+
+/* Applies to all form elements */
+form{
+    padding: 5px;
+    margin-top: 0px;
+    margin-left: -5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    float: left;
+}
+
+.choose-box {
+    text-align: left;
+    display: block;
+    margin:left;
+}
+
+/* Applies to all user-name-box class elements */
+.user-name-box {
+    /* Three Team */
+    width: 240px;
+    height: 40;
+    padding: 0px;
+
+    color: #79f1ff;
+    text-align: center;
+}
+
+/* Applies to all user-name class elements */
+.user-name {
+    /* Three Team Size */
+    font-size: 35px;
+    color: rgb(256,256,256);
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+}
+
+/* Applies to all user-message-box class elements */
+.user-message-box {
+    /* Three Teams */
+    width: 240px;
+    height: 85px;
+    padding: 0px;
+    margin-top: -6px;
+
+    text-align: center;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+/* Applies to all user-message class elements */
+.user-message {
+    /* Three Teams */
+    font-size: 15px;
+    color: #79f1ff;
+    padding: -5px;
+    background-color: transparent;
+}
