@@ -3,6 +3,8 @@
 Written by DougDoug, with help from Banana!
 You are welcome to adapt/use this code for whatever you'd like. Credit is appreciated but not necessary.
 
+If you would like a crappy video explanation of this project, I made a video covering the basics here: https://www.youtube.com/watch?v=vYE1rkIMj9w
+
 ## SETUP
 1) This was written in Python 3.9.2. Install page here: https://www.python.org/downloads/release/python-392/
 
