@@ -10,16 +10,14 @@ You are welcome to adapt/use this code for whatever you'd like. Credit is apprec
 
 3) This uses the twitchio module to connect to your Twitch channel.
 First you must generate a Access Token for your account. You can do this at: https://twitchtokengenerator.com/
-Then set the Acccess Token as a windows environment variable named TWITCH_ACCESS_TOKEN
-You can see where this is accessed in the __init__ function of the Bot class below.
+Then set the Acccess Token as a windows environment variable named TWITCH_ACCESS_TOKEN.
 
-4) This uses Microsoft Azure's TTS service for the text-to-speech voices. 
+5) This uses Microsoft Azure's TTS service for the text-to-speech voices. 
 First you must make an account and sign up for Microsoft Azure's services.
 Then use their site to generate an access key and region for the text-to-speech service.
 Then, set these as windows environment variables named AZURE_TTS_KEY and AZURE_TTS_REGION.
-You can see where this is accessed in the __init__ function of the AzureTTSManager class in azure_text_to_speech.py.
 
-5) Optionally, you can use OBS Websockets and an OBS plugin to make images move while talking.
+6) Optionally, you can use OBS Websockets and an OBS plugin to make images move while talking.
 First open up OBS. Make sure you're running version 28.X or later.
 Click Tools, then WebSocket Server Settings.
 Make sure "Enable WebSocket server" is checked. Make sure Server Port is '4455', and set the Server Password to 'TwitchChat9'.
@@ -38,6 +36,6 @@ If you don't need the images to move while talking, you can just delete the OBS 
 Alternatively, viewers can join the pool of potential players by typing !player1, !player2, or !player3.
 Then, when you hit Pick Random, it will pick one of the viewers randomly from that player pool.
 
-3) Once a user is picked, their message will be read out loud via Azure TTS.
-You can select the voice and the voice style using the drop down menus.
+3) Once a user is picked, their twitch messages will be automatically read out loud via Azure TTS.
+You can change the voice and the voice style using the drop down menus on the web app.
 If a user starts their message with (angry), (cheerful), (excited), (hopeful), (sad), (shouting), (shout), (terrified), (unfriendly), (whispering), (whisper), or (random), it will automatically use that voice style.
