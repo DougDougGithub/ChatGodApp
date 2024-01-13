@@ -3,7 +3,7 @@
 Written by DougDoug, with help from Banana!
 You are welcome to adapt/use this code for whatever you'd like. Credit is appreciated but not necessary.
 
-SETUP:
+## SETUP
 1) This was written in Python 3.9.2. Install page here: https://www.python.org/downloads/release/python-392/
 
 2) Run "pip install -r requirements.txt" to install all modules.
@@ -30,7 +30,7 @@ Lastly, in the voices_manager.py code, update the OBS section so that it will tu
 Note that OBS must be open when you're running this code, otherwise OBS WebSockets won't be able to connect.
 If you don't need the images to move while talking, you can just delete the OBS portions of the code.
 
-BASIC APP USAGE:
+## BASIC APP USAGE
 
 1) Run chat_god_app.py and then open up http://127.0.0.1:5000 on a browser or as a browser source in OBS
 
