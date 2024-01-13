@@ -1,6 +1,6 @@
 # ChatGodApp
 
-Written by DougDoug, with help from Banana
+Written by DougDoug, with help from Banana!
 You are welcome to adapt/use this code for whatever you'd like. Credit is appreciated but not necessary.
 
 SETUP:
