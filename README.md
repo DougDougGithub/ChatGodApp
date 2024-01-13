@@ -1,6 +1,7 @@
 # ChatGodApp
-# Written by DougDoug, with help from Banana
-# You are welcome to adapt/use this code for whatever you'd like. Credit is appreciated but not necessary.
+
+Written by DougDoug, with help from Banana
+You are welcome to adapt/use this code for whatever you'd like. Credit is appreciated but not necessary.
 
 SETUP:
 1) This was written in Python 3.9.2. Run "pip install -r requirements.txt" to install all modules.
@@ -37,5 +38,4 @@ Then, when you hit Pick Random, it will pick one of the viewers randomly from th
 
 3) Once a user is picked, their message will be read out loud via Azure TTS.
 You can select the voice and the voice style using the drop down menus.
-If a user starts their message with (angry), (cheerful), (excited), (hopeful), (sad), (shouting), (shout), (terrified), (unfriendly), (whispering), (whisper), or (random), it will automatically use that voice style
-'''
+If a user starts their message with (angry), (cheerful), (excited), (hopeful), (sad), (shouting), (shout), (terrified), (unfriendly), (whispering), (whisper), or (random), it will automatically use that voice style.
