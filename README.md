@@ -3,23 +3,22 @@
 Written by DougDoug, with help from Banana!
 You are welcome to adapt/use this code for whatever you'd like. Credit is appreciated but not necessary.
 
-If you would like a crappy video explanation of this project, I made a video covering the basics here: https://www.youtube.com/watch?v=vYE1rkIMj9w
-
 ## SETUP
 1) This was written in Python 3.9.2. Install page here: https://www.python.org/downloads/release/python-392/
 
 2) Run "pip install -r requirements.txt" to install all modules.
 
 3) This uses the twitchio module to connect to your Twitch channel.
-First you must generate a Access Token for your account. You can do this at: https://twitchtokengenerator.com/
-Then set the Acccess Token as a windows environment variable named TWITCH_ACCESS_TOKEN.
+First you must generate a Access Token for your account. You can do this at: https://twitchtokengenerator.com/ , just make sure the Access Token has chat:read and chat:edit enabled.
+Once you've generated an Access Token, set it as a windows environment variable named TWITCH_ACCESS_TOKEN.
+Then update the TWITCH_CHANNEL_NAME variable in chat_god_app.py to the name of the twitch channel you are connecting to.
 
-5) This uses Microsoft Azure's TTS service for the text-to-speech voices. 
+4) This uses Microsoft Azure's TTS service for the text-to-speech voices. 
 First you must make an account and sign up for Microsoft Azure's services.
 Then use their site to generate an access key and region for the text-to-speech service.
 Then, set these as windows environment variables named AZURE_TTS_KEY and AZURE_TTS_REGION.
 
-6) Optionally, you can use OBS Websockets and an OBS plugin to make images move while talking.
+5) Optionally, you can use OBS Websockets and an OBS plugin to make images move while talking.
 First open up OBS. Make sure you're running version 28.X or later.
 Click Tools, then WebSocket Server Settings.
 Make sure "Enable WebSocket server" is checked. Make sure Server Port is '4455', and set the Server Password to 'TwitchChat9'.
